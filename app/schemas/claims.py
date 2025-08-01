@@ -3,15 +3,15 @@ from typing import Optional
 from uuid import UUID
 from datetime import datetime
 
-class CLaimBase(BaseModel):
+class ClaimBase(BaseModel):
     user_id: UUID
     incident_reported_at: datetime
     status: Optional[str] = "Pending"
 
-class ClaimCreate(CLaimBase):
+class ClaimCreate(ClaimBase):
     pass
 
-class ClaimOut(CLaimBase):
+class ClaimOut(ClaimBase):
     claim_id: UUID
     created_at: datetime
     updated_at: Optional[datetime]
