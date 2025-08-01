@@ -16,7 +16,7 @@ def create_claim(claim: claims.ClaimCreate, db: Session = Depends(get_db)):
     return db_claim
 
 @router.get("/{claims_id}", response_model=claims.ClaimOut)
-def read_claim(claims_id: UUID, db: Session = Depends(get_db)):
+def get_claim(claims_id: UUID, db: Session = Depends(get_db)):
     db_claim = db.query(models.claims.Claim).filter(models.claims.Claim.claim_id == claims_id).first()
     if not db_claim:
         raise HTTPException(status_code=404, detail="Claim not found")
