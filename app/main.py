@@ -1,12 +1,11 @@
 from fastapi import FastAPI
 from app.routers import claims
-from app.routers import users, images, detected_part
+from app.routers import users, images
 
 
 app = FastAPI()
 
-app.include_router(claims.router)
-app.include_router(users.router)
+app.include_router(claims.router, prefix="/claims", tags=["claims"])
+app.include_router(users.router, prefix="/users", tags=["users"])
 
-app.include_router(images.router)
-app.include_router(detected_part.router)
+app.include_router(images.router, prefix="/images", tags=["images"])
