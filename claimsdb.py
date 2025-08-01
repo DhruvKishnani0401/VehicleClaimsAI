@@ -66,7 +66,7 @@ class CostEstimate(Base):
     image_id = Column(UUID(as_uuid=True), ForeignKey("images.image_id"), nullable=False)
     estimated_cost_ai = Column(Numeric(10, 2))
     estimated_cost_human = Column(Numeric(10, 2))
-    explanantion = Column(Text)
+    explanation = Column(Text)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
 class FraudFlag(Base):
