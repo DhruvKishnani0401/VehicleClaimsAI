@@ -2,6 +2,7 @@ from sqlalchemy import Column, String, DateTime, ForeignKey, Text, Boolean
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from geoalchemy2 import Geography
 from sqlalchemy.sql import func
+from sqlalchemy.orm import relationship
 import uuid
 
 from app.database import Base
@@ -14,7 +15,11 @@ class Image(Base):
     upload_time = Column(DateTime(timezone=True), server_default=func.now())
     exif_data = Column(JSONB)
     gps_location = Column(Geography(geometry_type='POINT', srid=4326))
-    is_gps_mismatch = Column(Boolean)
+    is_gps_mismatch = Column(Boolean, default=False)
     is_metadata_missing = Column(Boolean)
     vlm_summary = Column(Text)
     vlm_anomalies = Column(Text)
+
+    # Relationships
+    detected_parts = relationship("DetectedPart", back_populates="image", cascade="all, delete-orphan")
+    detected_damages = relationship("DetectedDamage", back_populates="image", cascade="all, delete-orphan")

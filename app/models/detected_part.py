@@ -3,6 +3,7 @@ from sqlalchemy.dialects.postgresql import UUID, VARCHAR, JSONB
 from geoalchemy2 import Geography
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import func
+from sqlalchemy.orm import relationship
 import uuid
 
 from app.database import Base
@@ -14,3 +15,5 @@ class DetectedPart(Base):
     part_name = Column(String(255), nullable=False)
     bbox = Column(JSONB)
     confidence_score = Column(Float)
+
+    image = relationship("Image", back_populates="detected_parts")

@@ -34,7 +34,7 @@ class Image(Base):
     upload_time = Column(DateTime(timezone=True), server_default=func.now())
     exif_data = Column(JSONB)
     gps_location = Column(Geography(geometry_type='POINT', srid=4326))
-    is_gps_mismatch = Column(Boolean)
+    is_gps_mismatch = Column(Boolean, default=False)
     is_metadata_missing = Column(Boolean)
     vlm_summary = Column(Text)
     vlm_anomalies = Column(Text)
@@ -56,6 +56,7 @@ class DetectedDamage(Base):
     severity_level = Column(String(50))
     segmentation_mask = Column(JSONB)
     associated_part = Column(String(100))
+    bbox = Column(JSONB)
     confidence_score = Column(Float)
 
 class CostEstimate(Base):
