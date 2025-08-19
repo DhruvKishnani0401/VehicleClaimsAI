@@ -60,21 +60,3 @@ def get_image(image_id: UUID, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Image not found")
     return db_image
 
-"""@router.post("/{image_id}/analyze")
-async def analyze_image(image_id: UUID, db: Session = Depends(get_db)):
-    image = get_image(image_id, db)
-
-    image_path = image.storage_url
-
-    if not os.path.exists(image_path):
-        raise HTTPException(status_code=400, detail="Image file missing on server")
-
-    part_pred = damage_part_model.predict(image_path).json()
-    type_pred = damage_type_model.predict(image_path).json()
-    #severity_pred = damage_severity_model.predict(image_path).json()
-
-    return {
-        "damaged_parts": part_pred,
-        "damage_types": type_pred,
-    }"""
-
